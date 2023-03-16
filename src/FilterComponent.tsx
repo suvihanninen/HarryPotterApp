@@ -7,14 +7,12 @@ import './App.css';
 
 type Props={
     data?: Character[],
-    setFilterAttributes: React.Dispatch<React.SetStateAction<string[]>>,
+    setFilterAttributes: (x: string[]) => void,
     filterAttributes: string[],
 }
 
 export default function FilterComponent({data, filterAttributes, setFilterAttributes}:Props) {
     const[triggerReset, setTriggerReset] = useState(true)
-    const[inputValue, setInputValue] = useState<string>()
-    
     
     function getOptions(category: string){
             //Get all different values behind one key
@@ -57,40 +55,16 @@ export default function FilterComponent({data, filterAttributes, setFilterAttrib
         console.log('AFTER: '+filterAttributes)
     }
 
-    const greeting = () => <p>HELLO</p>;
-    
-    const greeting1 = (a: string) => <p>{a}</p>
-
-    const greeting2 = (): string => {
-        return "Hello!"
-    }
-
-    function handleClick(e: React.MouseEvent<HTMLElement>){
-        e.preventDefault()
-        console.log({inputValue})
-    }
-
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
-        e.preventDefault()
-        setInputValue(e.target.value)
-        
-    }
 
     return(
         <div className="filter-dropdown-container">
-            <input onChange={handleChange} value={inputValue} placeholder="This is placeholder"/>
-            <button onClick={handleClick}>Press button!</button>
-            {inputValue && <p>{inputValue}</p>} 
-           <FilterDropdown triggerReset={triggerReset} setFilterAttributes={setFilterAttributes} filterAttributes={filterAttributes} options={getOptions('gender')} label='gender'  />
-           <FilterDropdown triggerReset={triggerReset} setFilterAttributes={setFilterAttributes} filterAttributes={filterAttributes} options={getOptions('species')} label='species' />
-           <FilterDropdown triggerReset={triggerReset} setFilterAttributes={setFilterAttributes} filterAttributes={filterAttributes} options={getOptions('ancestry')} label='ancestry' />
-           <FilterDropdown triggerReset={triggerReset} setFilterAttributes={setFilterAttributes} filterAttributes={filterAttributes} options={getOptions('eyeColour')} label='eyeColour' />
-           <FilterDropdown triggerReset={triggerReset} setFilterAttributes={setFilterAttributes} filterAttributes={filterAttributes} options={getOptions('hairColour')} label='hairColour' />
+           <FilterDropdown triggerReset={triggerReset} onSetFilterAttributes={setFilterAttributes} filterAttributes={filterAttributes} options={getOptions('gender')} label='gender'  />
+           <FilterDropdown triggerReset={triggerReset} onSetFilterAttributes={setFilterAttributes} filterAttributes={filterAttributes} options={getOptions('species')} label='species' />
+           <FilterDropdown triggerReset={triggerReset} onSetFilterAttributes={setFilterAttributes} filterAttributes={filterAttributes} options={getOptions('ancestry')} label='ancestry' />
+           <FilterDropdown triggerReset={triggerReset} onSetFilterAttributes={setFilterAttributes} filterAttributes={filterAttributes} options={getOptions('eyeColour')} label='eyeColour' />
+           <FilterDropdown triggerReset={triggerReset} onSetFilterAttributes={setFilterAttributes} filterAttributes={filterAttributes} options={getOptions('hairColour')} label='hairColour' />
            <button onClick={handleFiltering}>Submit filtering attributes</button>
            <button onClick={handleResetFilters}>Reset</button>
-           {greeting()}
-           {greeting1("HI!")}
-           <p>{greeting2()}</p>
         </div>
        
     )

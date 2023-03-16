@@ -50,6 +50,7 @@ export default function App() {
     
   }, [count]);
 
+//UseMemo
   useEffect(() => {
     renderCharacters()
   }, [data])
@@ -80,7 +81,7 @@ export default function App() {
         <div className='table' key={item.id}>
           <h3 className="text-3xl font-bold underline text-primary" >{item.name}</h3>
           <h4 className='wand-field'>Wand</h4>
-          <span className='text-blue-450 pl-4'>Wood: {item.wand.wood}</span>
+          <span className='text-blue-450 pl-4 mr-[150px]' >Wood: {item.wand.wood}</span>
           <span className='text-blue-450 pl-4'>Core: {item.wand.core}</span>
           <span className='text-blue-450 pl-4'>Length: {item.wand.length}</span>
           <img alt="" src={item.image} width={200} height={250}></img>
@@ -116,6 +117,7 @@ export default function App() {
       setData(updatedData);
 
     } 
+    
     setSelectedName("")
     setFormValues({
       characterName: "",

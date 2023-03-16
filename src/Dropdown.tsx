@@ -4,7 +4,7 @@ import { Character } from './model';
 
 
 type Props={
-    data: Character[],
+    data: Character[],//string array of names, we do not neet the whole object here
     onSelectedNameChange: (selectedName: string) => void;
     selectedName: string,
     setSelectedName: React.Dispatch<React.SetStateAction<string>>,
@@ -23,9 +23,6 @@ const Dropdown = ({data, selectedName, filterAttributes, setFilterAttributes, se
       }
     }, [])
 
-   
-    
-    //Filtering functionality is probably not working. Check filterAttributes that they are correct 
     const filteredCharacters = useMemo(() => {
         console.log("useMemo was ran")
         return data.filter(characters => filterAttributes.includes(characters.species) && filterAttributes.includes(characters.eyeColour) && filterAttributes.includes(characters.gender) && filterAttributes.includes(characters.ancestry) && filterAttributes.includes(characters.hairColour))}
@@ -48,7 +45,7 @@ const Dropdown = ({data, selectedName, filterAttributes, setFilterAttributes, se
             <select id="dropdown" value={selectedName} onChange={handleSelectNameChange}>
                 <option value="">Select</option>
                 {filteredCharacters.map((filteredCharacter) => (
-                    <React.Fragment key={filteredCharacter.id}>
+                    <React.Fragment key={filteredCharacter.name}>
                     <option  value={filteredCharacter.name}>
                     {filteredCharacter.name}
                     </option>
